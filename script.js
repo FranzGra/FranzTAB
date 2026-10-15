@@ -2115,7 +2115,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `newtab-backup-${new Date().toISOString().split('T')[0]}.json`;
+      // Data locale (toISOString è in UTC e dopo mezzanotte darebbe il giorno prima)
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      a.download = `FranzTAB backup ${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}.json`;
       a.click();
 
       const count = payload.bookmarks.length;

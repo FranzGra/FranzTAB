@@ -6,6 +6,7 @@ server/
 
 # Backup personali e file di prova
 newtab-backup-*.json
+FranzTAB backup *.json
 *.backup.json
 temp.txt
 test_*.html
