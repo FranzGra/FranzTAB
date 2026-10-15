@@ -78,6 +78,10 @@ FranzTAB non raccoglie dati: tutto resta in `chrome.storage.local`. Le uniche ri
 
 - Server di sincronizzazione self-hosted tra più dispositivi
 
+## Licenza
+
+FranzTAB è distribuito con licenza [GNU AGPL v3.0](LICENSE).
+
 ## Crediti
 
 - [SortableJS](https://github.com/SortableJS/Sortable) — licenza MIT
