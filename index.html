@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuova Scheda</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Sfondo a schermo intero -->
+  <div id="background" class="background"></div>
+
+  <!-- Intestazione con pulsante impostazioni -->
+  <header class="top-bar" style="gap: 12px;">
+    <button type="button" id="offline-badge" class="offline-badge glass-btn hidden" role="status"
+      title="Sei offline: clicca per maggiori dettagli">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="2" y1="2" x2="22" y2="22"></line>
+        <path d="M8.5 16.5a5 5 0 0 1 7 0"></path>
+        <path d="M2 8.82a15 15 0 0 1 4.17-2.65"></path>
+        <path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"></path>
+        <path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"></path>
+        <path d="M5 13a10 10 0 0 1 5.24-2.76"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+      <span>Offline · navigazione limitata</span>
+    </button>
+    <button id="edit-mode-btn" class="icon-btn glass-btn" aria-label="Modalità Modifica" title="Attiva Modifica">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+    </button>
+    <button id="settings-btn" class="icon-btn glass-btn" aria-label="Impostazioni" title="Impostazioni">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+        </path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Area principale -->
+  <main class="container" id="main-view">
+    <div class="main-grid-wrapper" style="position: relative; display: inline-block;">
+      <button id="main-prev-btn" class="icon-btn hidden" style="position: absolute; left: -4rem; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.1); border: 1px solid var(--border);" aria-label="Pagina precedente">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div id="grid" class="grid" style="transition: opacity 0.2s, transform 0.2s;">
+        <!-- Icone renderizzate qui -->
+      </div>
+      <button id="main-next-btn" class="icon-btn hidden" style="position: absolute; right: -4rem; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.1); border: 1px solid var(--border);" aria-label="Pagina successiva">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </main>
+
+  <!-- Vista Cartella -->
+  <div id="folder-view" class="folder-view hidden">
+    <div class="folder-view-content animate-popIn">
+      <div class="folder-view-header">
+        <button id="close-folder-btn" class="icon-btn" aria-label="Indietro">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <h2 id="folder-title" class="folder-title text-shadow">Nome Cartella</h2>
+        <div style="width: 32px;"></div> <!-- Spaziatore -->
+      </div>
+      <div class="folder-inner-scroll" style="position: relative;">
+        <button id="folder-prev-btn" class="icon-btn hidden" style="position: absolute; left: -4rem; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.1); border: 1px solid var(--border);" aria-label="Pagina precedente">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div id="folder-grid" class="grid folder-inner-grid" style="transition: opacity 0.2s, transform 0.2s;">
+          <!-- Icone cartella renderizzate qui -->
+        </div>
+        <button id="folder-next-btn" class="icon-btn hidden" style="position: absolute; right: -4rem; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.1); border: 1px solid var(--border);" aria-label="Pagina successiva">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale Aggiungi/Modifica Elemento -->
+  <dialog id="add-dialog" class="dialog glass-dialog edit-dialog">
+    <div class="dialog-content">
+      <div class="edit-head">
+        <div class="edit-head-text">
+          <h2 class="edit-title" id="dialog-title">Aggiungi Elemento</h2>
+          <p class="edit-subtitle">Anteprima di come apparirà nella griglia</p>
+        </div>
+        <div class="edit-live-preview" aria-hidden="true">
+          <div class="edit-live-icon" id="edit-live-icon"></div>
+          <span class="edit-live-name" id="edit-live-name">Nome</span>
+        </div>
+      </div>
+      <form id="add-form" class="edit-form">
+
+        <div class="type-selection edit-type-toggle" id="type-toggle-container">
+          <label class="type-box">
+            <input type="radio" name="item-type" value="link" class="hidden-radio" checked>
+            <div class="type-box-content"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg><span>Collegamento</span></div>
+          </label>
+          <label class="type-box" id="add-folder-label">
+            <input type="radio" name="item-type" value="folder" class="hidden-radio">
+            <div class="type-box-content"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg><span>Cartella</span></div>
+          </label>
+        </div>
+
+        <div id="url-group" class="edit-field">
+          <label for="item-url" class="edit-label">Indirizzo</label>
+          <div class="edit-input-wrap">
+            <span class="edit-input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></span>
+            <input type="text" inputmode="url" id="item-url" class="input edit-input" placeholder="github.com" autocomplete="off" spellcheck="false">
+          </div>
+          <p class="edit-hint">Se il nome è vuoto viene suggerito dal dominio.</p>
+        </div>
+
+        <div class="edit-field">
+          <label for="item-name" class="edit-label">Nome</label>
+          <div class="edit-input-wrap">
+            <span class="edit-input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg></span>
+            <input type="text" id="item-name" class="input edit-input" placeholder="Es. GitHub" required autocomplete="off">
+            <div id="name-loading-spinner" class="edit-input-spinner hidden">
+              <svg class="animate-spin" width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="edit-field" id="icon-selection-group">
+          <span class="edit-label">Icona</span>
+          <input type="file" id="item-custom-icon" accept="image/*" class="hidden">
+          <div class="edit-icon-choices">
+            <label class="icon-radio-card" id="auto-radio-card">
+              <input type="radio" name="icon-choice" value="auto" id="icon-choice-auto" class="hidden-radio" checked>
+              <div class="icon-radio-content">
+                <span class="icon-radio-check"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <div class="icon-radio-header">
+                  <span class="icon-radio-title">Automatica</span>
+                  <span class="icon-radio-desc">Dal sito web</span>
+                </div>
+                <div class="icon-radio-body">
+                  <div class="icon-choice-preview-new" id="auto-icon-preview-container">
+                    <img id="auto-icon-img" src="" alt="" class="hidden">
+                    <span id="auto-icon-placeholder" class="icon-placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span>
+                  </div>
+                  <div class="icon-actions-col">
+                    <button type="button" id="auto-gallery-btn" class="btn-chip hidden" title="Scegli tra altre icone trovate"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>Varianti</button>
+                    <button type="button" id="auto-crop-btn" class="btn-chip hidden" title="Modifica e ritaglia"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path></svg>Ritaglia</button>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <label class="icon-radio-card" id="icon-upload-box">
+              <input type="radio" name="icon-choice" value="custom" id="icon-choice-custom" class="hidden-radio">
+              <div class="icon-radio-content">
+                <span class="icon-radio-check"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <div class="icon-radio-header">
+                  <span class="icon-radio-title">Personalizzata</span>
+                  <span class="icon-radio-desc">Carica un'immagine</span>
+                </div>
+                <div class="icon-radio-body">
+                  <div class="icon-choice-preview-new upload-drop" id="custom-icon-trigger" title="Carica un'immagine">
+                    <img id="custom-icon-img" class="hidden" src="" alt="">
+                    <div id="upload-placeholder" class="upload-placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg><span>Carica</span></div>
+                  </div>
+                  <div class="icon-actions-col">
+                    <button type="button" id="custom-crop-btn" class="btn-chip hidden" title="Ritaglia icona"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path></svg>Ritaglia</button>
+                    <button type="button" id="remove-custom-icon-btn" class="btn-chip btn-chip-danger hidden" title="Rimuovi icona"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Rimuovi</button>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="dialog-footer edit-footer">
+          <button type="button" id="delete-item-btn" class="btn btn-ghost-danger hidden"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>Elimina</button>
+          <div style="flex-grow: 1;"></div>
+          <button type="button" id="cancel-add-btn" class="btn btn-outline">Annulla</button>
+          <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Salva</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modale Ritaglio Icona -->
+  <dialog id="crop-dialog" class="glass-dialog">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 class="text-xl font-semibold">Ritaglia Icona</h2>
+      </div>
+      <div class="space-y-4">
+        <!-- Area di ritaglio -->
+        <div class="cropper-container">
+          <canvas id="crop-canvas" width="400" height="400"></canvas>
+          <div class="cropper-overlay"></div>
+        </div>
+
+        <!-- Controlli -->
+        <div class="setting-item space-y-2">
+          <label class="text-sm flex-between">
+            <span>Zoom</span>
+            <span id="crop-zoom-val">100%</span>
+          </label>
+          <input type="range" id="crop-zoom-slider" min="10" max="300" step="1" value="100" class="slider w-full">
+        </div>
+
+        <!-- Sfondo -->
+        <div class="setting-item space-y-2 mt-4">
+          <label class="text-sm font-medium">Sfondo Immagine (per PNG)</label>
+          <div class="flex-between mt-2">
+            <label class="switch-container text-sm">
+              <input type="checkbox" id="crop-transparent-bg" class="switch-input" checked>
+              <div class="switch-track"><span class="switch-thumb"></span></div>
+              <span>Mantieni Trasparenza</span>
+            </label>
+            <input type="color" id="crop-bg-color" class="color-swatch" value="#ffffff" title="Colore Sfondo" disabled>
+          </div>
+        </div>
+
+
+        <div class="dialog-footer mt-6">
+          <button type="button" id="crop-cancel-btn" class="btn btn-outline">Annulla</button>
+          <button type="button" id="crop-confirm-btn" class="btn btn-primary">Conferma</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Sidebar Impostazioni -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+  <aside id="settings-sidebar" class="sidebar glass-sidebar" aria-label="Impostazioni">
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">Impostazioni</h2>
+      <button id="close-settings-btn" class="icon-btn" aria-label="Chiudi impostazioni" title="Chiudi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-pages-wrapper" id="sidebar-pages-wrapper">
+
+      <!-- ============ MAIN PAGE (INDEX) ============ -->
+      <div class="sidebar-page active" id="page-main">
+        <div class="sidebar-content">
+
+          <p class="section-label">Personalizzazione</p>
+          <div class="settings-categories">
+            <button class="settings-category-btn" data-target="page-theme">
+              <span class="category-icon">🎨</span>
+              <span class="category-text">
+                <span class="category-title">Tema e Sfondo</span>
+                <span class="category-desc">Colori, immagine di sfondo e sfocatura</span>
+              </span>
+              <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="settings-category-btn" data-target="page-box-style">
+              <span class="category-icon">🔲</span>
+              <span class="category-text">
+                <span class="category-title">Stile Box e Ombre</span>
+                <span class="category-desc">Vetro, colori, bordi, ombre e hover</span>
+              </span>
+              <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="settings-category-btn" data-target="page-icon-style">
+              <span class="category-icon">🖼️</span>
+              <span class="category-text">
+                <span class="category-title">Aspetto Icone</span>
+                <span class="category-desc">Dimensioni, arrotondamento e testo</span>
+              </span>
+              <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="settings-category-btn" data-target="page-grid">
+              <span class="category-icon">📏</span>
+              <span class="category-text">
+                <span class="category-title">Griglia Principale</span>
+                <span class="category-desc">Righe, colonne, spaziatura e allineamento</span>
+              </span>
+              <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="settings-category-btn" data-target="page-folder">
+              <span class="category-icon">📁</span>
+              <span class="category-text">
+                <span class="category-title">Vista Cartella</span>
+                <span class="category-desc">Layout della griglia interna alle cartelle</span>
+              </span>
+              <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <p class="section-label">Dati</p>
+          <div class="settings-box">
+            <p class="group-hint">Salva una copia dei tuoi collegamenti e delle impostazioni, oppure ripristinala da un file di backup.</p>
+            <input type="file" id="import-json" accept=".json" class="hidden">
+            <div class="btn-row">
+              <button id="export-btn" class="btn btn-outline w-full" title="Scarica un file .json con i tuoi dati">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Esporta Backup</span>
+              </button>
+              <button id="import-btn" class="btn btn-outline w-full" title="Ripristina i dati da un file .json">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <span>Importa Backup</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ PAGE: TEMA E SFONDO ============ -->
+      <div class="sidebar-page sub-page" id="page-theme">
+        <div class="sub-page-header">
+          <button class="back-btn" aria-label="Torna indietro">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Indietro</span>
+          </button>
+          <h3 class="sub-page-title">Tema e Sfondo</h3>
+        </div>
+        <div class="sidebar-content">
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18z"></path>
+              </svg>
+              <span class="group-title">Tema Interfaccia</span>
+            </div>
+            <p class="group-hint">«Auto» segue il tema di sistema del tuo computer.</p>
+            <div class="setting-item">
+              <div class="segmented-control">
+                <label class="type-box">
+                  <input type="radio" name="theme-mode" value="auto" class="hidden-radio" checked>
+                  <div class="type-box-content"><span>Auto</span></div>
+                </label>
+                <label class="type-box">
+                  <input type="radio" name="theme-mode" value="light" class="hidden-radio">
+                  <div class="type-box-content"><span>Chiaro</span></div>
+                </label>
+                <label class="type-box">
+                  <input type="radio" name="theme-mode" value="dark" class="hidden-radio">
+                  <div class="type-box-content"><span>Scuro</span></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span class="group-title">Immagine di Sfondo</span>
+            </div>
+            <input type="file" id="bg-upload" accept="image/*" class="hidden">
+            <button id="upload-bg-btn" class="btn btn-outline w-full">Carica Immagine</button>
+
+            <div id="bg-image-settings" class="setting-list mt-4">
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="bg-brightness-slider">Oscuramento</label>
+                  <span class="setting-value" id="bg-brightness-val">0%</span>
+                </div>
+                <input type="range" id="bg-brightness-slider" min="0" max="100" step="5" value="0" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="bg-blur-slider">Sfocatura (Blur)</label>
+                  <span class="setting-value" id="bg-blur-val">0px</span>
+                </div>
+                <input type="range" id="bg-blur-slider" min="0" max="30" step="1" value="0" class="slider">
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle>
+                <circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle>
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+              </svg>
+              <span class="group-title">Tinta Unita</span>
+            </div>
+            <p class="group-hint">Sostituisce l'immagine di sfondo con un colore pieno.</p>
+            <div class="color-palette">
+              <button class="color-swatch" style="background: #0f172a;" data-color="#0f172a" title="#0f172a"></button>
+              <button class="color-swatch" style="background: #1e293b;" data-color="#1e293b" title="#1e293b"></button>
+              <button class="color-swatch" style="background: #334155;" data-color="#334155" title="#334155"></button>
+              <button class="color-swatch" style="background: #ef4444;" data-color="#ef4444" title="#ef4444"></button>
+              <button class="color-swatch" style="background: #f97316;" data-color="#f97316" title="#f97316"></button>
+              <button class="color-swatch" style="background: #eab308;" data-color="#eab308" title="#eab308"></button>
+              <button class="color-swatch" style="background: #22c55e;" data-color="#22c55e" title="#22c55e"></button>
+              <button class="color-swatch" style="background: #06b6d4;" data-color="#06b6d4" title="#06b6d4"></button>
+              <button class="color-swatch" style="background: #3b82f6;" data-color="#3b82f6" title="#3b82f6"></button>
+              <button class="color-swatch" style="background: #8b5cf6;" data-color="#8b5cf6" title="#8b5cf6"></button>
+              <div class="color-picker-wrapper">
+                <input type="color" id="bg-color-picker" class="color-swatch" value="#0f172a"
+                  title="Colore personalizzato">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ PAGE: STILE BOX E OMBRE ============ -->
+      <div class="sidebar-page sub-page" id="page-box-style">
+        <div class="sub-page-header">
+          <button class="back-btn" aria-label="Torna indietro">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Indietro</span>
+          </button>
+          <h3 class="sub-page-title">Stile Box e Ombre</h3>
+        </div>
+        <div class="sidebar-content">
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span class="group-title">Modalità Visualizzazione</span>
+            </div>
+            <p class="group-hint">Con «Solo Icona» il riquadro attorno all'icona viene rimosso e le opzioni di stile qui sotto non sono disponibili.</p>
+            <div class="setting-item">
+              <div class="segmented-control">
+                <label class="type-box">
+                  <input type="radio" name="box-mode" value="box" class="hidden-radio" checked>
+                  <div class="type-box-content"><span>Box</span></div>
+                </label>
+                <label class="type-box">
+                  <input type="radio" name="box-mode" value="icon-only" class="hidden-radio">
+                  <div class="type-box-content"><span>Solo Icona</span></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Impostazioni disponibili solo in modalità "Box" -->
+          <div id="box-style-settings">
+
+            <div class="settings-box">
+              <div class="group-head">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M3 9h18"></path>
+                </svg>
+                <span class="group-title">Sfondo del Box</span>
+              </div>
+              <div class="setting-list">
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <span class="setting-label">Stile Sfondo</span>
+                  </div>
+                  <div class="segmented-control">
+                    <label class="type-box">
+                      <input type="radio" name="box-bg-style" value="glass" class="hidden-radio" checked>
+                      <div class="type-box-content"><span>Vetro</span></div>
+                    </label>
+                    <label class="type-box">
+                      <input type="radio" name="box-bg-style" value="solid" class="hidden-radio">
+                      <div class="type-box-content"><span>Solido</span></div>
+                    </label>
+                    <label class="type-box">
+                      <input type="radio" name="box-bg-style" value="transparent" class="hidden-radio">
+                      <div class="type-box-content"><span>Trasp.</span></div>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <span class="setting-label">Colore Box</span>
+                  </div>
+                  <div class="color-palette">
+                    <button class="color-swatch box-color-swatch" style="background: #ffffff;" data-color="#ffffff" title="#ffffff"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #000000;" data-color="#000000" title="#000000"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #f8fafc;" data-color="#f8fafc" title="#f8fafc"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #1e293b;" data-color="#1e293b" title="#1e293b"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #ef4444;" data-color="#ef4444" title="#ef4444"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #f97316;" data-color="#f97316" title="#f97316"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #eab308;" data-color="#eab308" title="#eab308"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #22c55e;" data-color="#22c55e" title="#22c55e"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #3b82f6;" data-color="#3b82f6" title="#3b82f6"></button>
+                    <button class="color-swatch box-color-swatch" style="background: #8b5cf6;" data-color="#8b5cf6" title="#8b5cf6"></button>
+                    <div class="color-picker-wrapper">
+                      <input type="color" id="box-color-picker" class="color-swatch" value="#ffffff"
+                        title="Colore personalizzato">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <label class="setting-label" for="box-opacity-slider">Opacità Sfondo</label>
+                    <span class="setting-value" id="box-opacity-val">20%</span>
+                  </div>
+                  <input type="range" id="box-opacity-slider" min="0" max="100" step="5" value="20" class="slider">
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-box">
+              <div class="group-head">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                </svg>
+                <span class="group-title">Bordo</span>
+              </div>
+              <div class="setting-list">
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <label class="setting-label" for="box-border-width-slider">Spessore Bordo</label>
+                    <span class="setting-value" id="box-border-width-val">1px</span>
+                  </div>
+                  <input type="range" id="box-border-width-slider" min="0" max="8" step="1" value="1" class="slider">
+                </div>
+
+                <div class="setting-item setting-item-inline">
+                  <label class="setting-label" for="box-border-color-picker">Colore Bordo</label>
+                  <input type="color" id="box-border-color-picker" class="color-input" value="#ffffff">
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <label class="setting-label" for="box-border-opacity-slider">Opacità Bordo</label>
+                    <span class="setting-value" id="box-border-opacity-val">30%</span>
+                  </div>
+                  <input type="range" id="box-border-opacity-slider" min="0" max="100" step="5" value="30" class="slider">
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-box">
+              <div class="group-head">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="13" height="13" rx="2"></rect><path d="M8 21h11a2 2 0 0 0 2-2V8"></path>
+                </svg>
+                <span class="group-title">Ombra</span>
+              </div>
+              <div class="setting-list">
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <label class="setting-label" for="box-shadow-blur-slider">Blur Ombra</label>
+                    <span class="setting-value" id="box-shadow-blur-val">12px</span>
+                  </div>
+                  <input type="range" id="box-shadow-blur-slider" min="0" max="50" step="1" value="12" class="slider">
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-head">
+                    <label class="setting-label" for="box-shadow-opacity-slider">Opacità Ombra</label>
+                    <span class="setting-value" id="box-shadow-opacity-val">10%</span>
+                  </div>
+                  <input type="range" id="box-shadow-opacity-slider" min="0" max="100" step="5" value="10" class="slider">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3l7 17 2-7 7-2z"></path>
+              </svg>
+              <span class="group-title">Titolo ed Effetti Hover</span>
+            </div>
+            <div class="setting-list">
+              <div class="setting-item setting-item-inline">
+                <span class="setting-label">Mostra Titolo</span>
+                <label class="switch-container" aria-label="Mostra Titolo">
+                  <input type="checkbox" id="show-title-checkbox" class="switch-input" checked>
+                  <span class="switch-track"><span class="switch-thumb"></span></span>
+                </label>
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="box-hover-scale-slider">Effetto Hover Scala</label>
+                  <span class="setting-value" id="box-hover-scale-val">1.05</span>
+                </div>
+                <input type="range" id="box-hover-scale-slider" min="1" max="1.3" step="0.01" value="1.05" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="box-hover-lift-slider">Effetto Hover Sollevamento</label>
+                  <span class="setting-value" id="box-hover-lift-val">0px</span>
+                </div>
+                <input type="range" id="box-hover-lift-slider" min="0" max="20" step="1" value="0" class="slider">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ PAGE: ASPETTO ICONE ============ -->
+      <div class="sidebar-page sub-page" id="page-icon-style">
+        <div class="sub-page-header">
+          <button class="back-btn" aria-label="Torna indietro">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Indietro</span>
+          </button>
+          <h3 class="sub-page-title">Aspetto Icone</h3>
+        </div>
+        <div class="sidebar-content">
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span class="group-title">Dimensioni e Forma</span>
+            </div>
+            <div class="setting-list">
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="icon-size-slider">Dimensione Icone</label>
+                  <span class="setting-value" id="icon-size-val">64px</span>
+                </div>
+                <input type="range" id="icon-size-slider" min="40" max="120" step="4" value="64" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="icon-radius-slider">Arrotondamento (Radius)</label>
+                  <span class="setting-value" id="icon-radius-val">22px</span>
+                </div>
+                <input type="range" id="icon-radius-slider" min="0" max="100" step="1" value="22" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="inner-icon-scale-slider">Img Interna</label>
+                  <span class="setting-value" id="inner-icon-scale-val">50%</span>
+                </div>
+                <input type="range" id="inner-icon-scale-slider" min="20" max="100" step="5" value="50" class="slider">
+                <p class="setting-hint">Quanto spazio occupa il logo all'interno del riquadro.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line>
+              </svg>
+              <span class="group-title">Testo</span>
+            </div>
+            <div class="setting-list">
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="title-font-size-slider">Dimensione Testo Titolo</label>
+                  <span class="setting-value" id="title-font-size-val">12px</span>
+                </div>
+                <input type="range" id="title-font-size-slider" min="8" max="24" step="1" value="12" class="slider">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ PAGE: GRIGLIA PRINCIPALE ============ -->
+      <div class="sidebar-page sub-page" id="page-grid">
+        <div class="sub-page-header">
+          <button class="back-btn" aria-label="Torna indietro">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Indietro</span>
+          </button>
+          <h3 class="sub-page-title">Griglia Principale</h3>
+        </div>
+        <div class="sidebar-content">
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span class="group-title">Dimensione Griglia</span>
+            </div>
+            <p class="group-hint">Numero massimo di collegamenti mostrati per pagina.</p>
+            <div class="setting-grid-2">
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="cols-slider">Colonne</label>
+                  <span class="setting-value" id="cols-val">6</span>
+                </div>
+                <input type="range" id="cols-slider" min="2" max="12" step="1" value="6" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="rows-slider">Righe</label>
+                  <span class="setting-value" id="rows-val">3</span>
+                </div>
+                <input type="range" id="rows-slider" min="1" max="10" step="1" value="3" class="slider">
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="8 3 4 3 4 7"></polyline><polyline points="16 3 20 3 20 7"></polyline>
+                <polyline points="8 21 4 21 4 17"></polyline><polyline points="16 21 20 21 20 17"></polyline>
+              </svg>
+              <span class="group-title">Spaziatura</span>
+            </div>
+            <div class="setting-grid-2">
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="gap-x-slider">Gap Orizz.</label>
+                  <span class="setting-value" id="gap-x-val">20px</span>
+                </div>
+                <input type="range" id="gap-x-slider" min="0" max="300" step="20" value="0" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="gap-y-slider">Gap Vert.</label>
+                  <span class="setting-value" id="gap-y-val">20px</span>
+                </div>
+                <input type="range" id="gap-y-slider" min="0" max="300" step="20" value="0" class="slider">
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line><polyline points="8 8 12 4 16 8"></polyline><polyline points="8 16 12 20 16 16"></polyline>
+              </svg>
+              <span class="group-title">Allineamento Verticale</span>
+            </div>
+            <div class="setting-item">
+              <div class="segmented-control">
+                <label class="type-box">
+                  <input type="radio" name="align-y" value="flex-start" class="hidden-radio">
+                  <div class="type-box-content"><span>In Alto</span></div>
+                </label>
+                <label class="type-box">
+                  <input type="radio" name="align-y" value="center" class="hidden-radio">
+                  <div class="type-box-content"><span>Al Centro</span></div>
+                </label>
+                <label class="type-box">
+                  <input type="radio" name="align-y" value="flex-end" class="hidden-radio">
+                  <div class="type-box-content"><span>In Basso</span></div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ PAGE: VISTA CARTELLA ============ -->
+      <div class="sidebar-page sub-page" id="page-folder">
+        <div class="sub-page-header">
+          <button class="back-btn" aria-label="Torna indietro">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <span>Indietro</span>
+          </button>
+          <h3 class="sub-page-title">Vista Cartella</h3>
+        </div>
+        <div class="sidebar-content">
+
+          <div class="settings-box">
+            <div class="group-head">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="group-title">Griglia Interna</span>
+            </div>
+            <p class="group-hint">Disposizione dei collegamenti quando apri una cartella.</p>
+            <div class="setting-grid-2">
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="folder-cols-slider">Colonne</label>
+                  <span class="setting-value" id="folder-cols-val">4</span>
+                </div>
+                <input type="range" id="folder-cols-slider" min="2" max="12" step="1" value="4" class="slider">
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-head">
+                  <label class="setting-label" for="folder-rows-slider">Righe</label>
+                  <span class="setting-value" id="folder-rows-val">3</span>
+                </div>
+                <input type="range" id="folder-rows-slider" min="1" max="10" step="1" value="3" class="slider">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Modale Galleria Icone Automatiche -->
+  <dialog id="icon-gallery-dialog" class="dialog glass-dialog">
+    <div class="dialog-content" style="max-width: 500px; width: 100%;">
+      <div class="dialog-header border-b border-white/10 pb-4 mb-4">
+        <h2 class="text-lg font-semibold" style="color: var(--dialog-text);">Scegli Icona Automatica</h2>
+      </div>
+      <div id="icon-gallery-grid" class="max-h-[50vh] overflow-y-auto p-1"
+        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 16px; scrollbar-width: none;">
+        <!-- Icons go here -->
+      </div>
+      <div class="dialog-footer mt-6 pt-4 border-t border-white/10 flex justify-end">
+        <button type="button" id="close-gallery-btn" class="btn btn-outline" style="min-width: 100px;">Chiudi</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="offline-dialog" class="dialog glass-dialog offline-dialog">
+    <div class="offline-dialog-body">
+      <div class="offline-dialog-head">
+        <div class="offline-dialog-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"></line><path d="M8.5 16.5a5 5 0 0 1 7 0"></path><path d="M2 8.82a15 15 0 0 1 4.17-2.65"></path><path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"></path><path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"></path><path d="M5 13a10 10 0 0 1 5.24-2.76"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+        </div>
+        <div>
+          <h2 class="offline-dialog-title">Sei offline</h2>
+          <p class="offline-dialog-sub">La pagina funziona, ma con alcune limitazioni.</p>
+        </div>
+      </div>
+      <ul class="offline-list">
+        <li class="ok">
+          <span class="offline-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          <div><strong>Disponibile</strong><span>Collegamenti, cartelle, impostazioni, sfondo e icone già salvate in cache.</span></div>
+        </li>
+        <li class="warn">
+          <span class="offline-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span>
+          <div><strong>Siti web</strong><span>Aprendo un collegamento, il sito potrebbe non caricarsi finché la connessione non torna.</span></div>
+        </li>
+        <li class="warn">
+          <span class="offline-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
+          <div><strong>Icone nuove</strong><span>Le icone automatiche dei collegamenti aggiunti ora verranno scaricate al ritorno della rete.</span></div>
+        </li>
+      </ul>
+      <div class="offline-dialog-footer">
+        <p>Il badge scompare da solo quando torni online.</p>
+        <button type="button" id="close-offline-btn" class="btn btn-primary">Ho capito</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="Sortable.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

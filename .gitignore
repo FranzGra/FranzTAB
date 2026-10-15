@@ -1,0 +1,19 @@
+# Server di sincronizzazione: verrà pubblicato in futuro
+server/
+
+# Pacchetti generati per gli store
+*.zip
+
+# Backup personali e file di prova
+newtab-backup-*.json
+*.backup.json
+temp.txt
+test_*.html
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+.claude/
