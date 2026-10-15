@@ -31,7 +31,7 @@
 ### Da sorgente
 1. Clona il repository
    ```bash
-   git clone https://github.com/<utente>/FranzTAB.git
+   git clone https://github.com/FranzGra/FranzTAB.git
    ```
 2. Apri `chrome://extensions` (o `edge://extensions`)
 3. Attiva **Modalità sviluppatore**
@@ -72,7 +72,7 @@ Ricorda di aumentare `version` in `manifest.json` a ogni nuova pubblicazione.
 
 ## Privacy
 
-FranzTAB non raccoglie dati: tutto resta in `chrome.storage.local`. Le uniche richieste di rete sono verso servizi pubblici di favicon, inviando solo il dominio del sito. Dettagli in [docs/privacy.html](docs/privacy.html).
+FranzTAB non raccoglie dati: tutto resta in `chrome.storage.local`. Le uniche richieste di rete sono verso servizi pubblici di favicon, inviando solo il dominio del sito. Dettagli nell'[informativa sulla privacy](https://franzgra.github.io/FranzTAB/privacy.html).
 
 ## Roadmap
 

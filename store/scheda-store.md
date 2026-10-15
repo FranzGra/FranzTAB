@@ -37,7 +37,7 @@ Sostituire la pagina Nuova scheda con una griglia personalizzabile di collegamen
 Non raccoglie nessuna categoria di dati. Certificare tutte e tre le dichiarazioni (nessuna vendita, nessun uso non correlato, nessun uso per credito).
 
 ## URL informativa privacy
-Con GitHub Pages attivo sulla cartella /docs: https://<utente>.github.io/FranzTAB/privacy.html
+Con GitHub Pages attivo sulla cartella /docs: https://franzgra.github.io/FranzTAB/privacy.html
 
 ## Contenuto dello ZIP
 manifest.json, index.html, script.js, style.css, background.js, Sortable.min.js, icons/
