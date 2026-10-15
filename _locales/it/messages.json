@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "FranzTAB",
+    "description": "Nome dell'estensione"
+  },
+  "extDescription": {
+    "message": "Sostituisce la nuova scheda con una griglia minimale di collegamenti e cartelle, personalizzabile e utilizzabile anche offline.",
+    "description": "Descrizione dell'estensione (max 132 caratteri)"
+  }
+}

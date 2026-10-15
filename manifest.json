@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "FranzTAB",
-  "short_name": "FranzTAB",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extName__",
   "version": "1.0.0",
-  "description": "Sostituisce la nuova scheda con una griglia minimale di collegamenti e cartelle, personalizzabile e utilizzabile anche offline.",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",

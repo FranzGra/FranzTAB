@@ -40,6 +40,6 @@ Non raccoglie nessuna categoria di dati. Certificare tutte e tre le dichiarazion
 Con GitHub Pages attivo sulla cartella /docs: https://franzgra.github.io/FranzTAB/privacy.html
 
 ## Contenuto dello ZIP
-manifest.json, index.html, script.js, style.css, background.js, Sortable.min.js, icons/
+manifest.json, index.html, script.js, style.css, background.js, Sortable.min.js, icons/, _locales/
 
 Da NON includere: server/, store/, docs/, README.md, .gitignore, test_*.html, temp.txt, backup JSON

@@ -62,6 +62,7 @@ style.css         Stili
 background.js     Service worker: scarica le favicon per la cache offline
 Sortable.min.js   Trascinamento (SortableJS)
 icons/            Icone dell'estensione
+_locales/         Nome e descrizione tradotti (en, it)
 docs/             Informativa privacy (GitHub Pages)
 store/            Testi per le schede degli store
 ```
@@ -69,7 +70,7 @@ store/            Testi per le schede degli store
 ## Creare il pacchetto per gli store
 
 ```bash
-powershell -Command "Compress-Archive -Path manifest.json,index.html,script.js,style.css,background.js,Sortable.min.js,icons -DestinationPath FranzTAB-1.0.0.zip -Force"
+powershell -Command "Compress-Archive -Path manifest.json,index.html,script.js,style.css,background.js,Sortable.min.js,icons,_locales -DestinationPath FranzTAB-1.0.0.zip -Force"
 ```
 
 Ricorda di aumentare `version` in `manifest.json` a ogni nuova pubblicazione.

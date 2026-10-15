@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "FranzTAB",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Replaces the new tab with a minimal grid of links and folders, customizable and usable even offline.",
+    "description": "Extension description (max 132 characters)"
+  }
+}
