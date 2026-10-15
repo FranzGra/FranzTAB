@@ -8,6 +8,10 @@
   Una nuova scheda minimale per Chrome ed Edge: griglia di collegamenti e cartelle, personalizzabile e utilizzabile anche offline.
 </p>
 
+<p align="center">
+  <img src="docs/preview.png" alt="Anteprima di FranzTAB" width="900">
+</p>
+
 ---
 
 ## Funzionalità
